@@ -1,0 +1,24 @@
+# Tier 1a sidecar — registered as engine="chandra-local" in the smart
+# router. The contract identifier stays "chandra-local" for audit-row
+# stability, but the implementation in v0.1 uses EasyOCR in paragraph mode
+# (`paragraph=True`, `low_text=0.4`) tuned for handwritten clinical notes.
+#
+# Why not the real datalab-to/chandra: package distribution is unstable
+# (no clean PyPI release as of 2026-Q2). EasyOCR is Apache 2.0, supports
+# Thai handwriting, and matches the HTTP contract.
+#
+# B-50a.1: pinning torch+cpu wheels from pytorch.org to avoid pulling
+# the CUDA toolchain on CPU-only nodes (was ~2GB; +cpu wheels are ~200MB).
+# B-50a.2 follow-up: revisit when chandra ships a stable wheel.
+
+--extra-index-url https://download.pytorch.org/whl/cpu
+
+torch==2.11.0+cpu
+torchvision==0.26.0+cpu
+fastapi==0.115.5
+uvicorn[standard]==0.32.1
+python-multipart==0.0.20
+easyocr==1.7.2
+opencv-python-headless==4.10.0.84
+numpy<2.0
+Pillow==10.4.0

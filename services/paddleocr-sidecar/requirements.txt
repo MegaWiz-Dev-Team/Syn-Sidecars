@@ -1,0 +1,22 @@
+# Tier 1b sidecar — registered as engine="paddleocr-local" in the smart
+# router (audit-row stable identifier). Implementation uses EasyOCR because
+# PaddleOCR 2.7's built-in language list doesn't include Thai
+# (['ch','en','korean','japan','chinese_cht','ta','te','ka','latin',
+# 'arabic','cyrillic','devanagari']) and PaddleOCR 3.x has a different
+# API surface that's not yet stable. EasyOCR is Apache 2.0, has
+# first-class Thai, and matches the contract.
+#
+# B-50a.1: pinning torch+cpu wheels from pytorch.org to avoid pulling
+# the CUDA toolchain on CPU-only nodes (was ~2GB; +cpu wheels are ~200MB).
+
+--extra-index-url https://download.pytorch.org/whl/cpu
+
+torch==2.11.0+cpu
+torchvision==0.26.0+cpu
+fastapi==0.115.5
+uvicorn[standard]==0.32.1
+python-multipart==0.0.20
+easyocr==1.7.2
+opencv-python-headless==4.10.0.84
+numpy<2.0
+Pillow==10.4.0
