@@ -1,5 +1,6 @@
-# 🚪 Syn-Sidecars — Build & Push paddleocr + chandra images to ghcr.io
-# Polyrepo CI pattern (org-wide standard)
+# 🚪 Syn-Sidecars — Build & Push paddleocr sidecar image to ghcr.io
+# Polyrepo CI pattern (org-wide standard).
+# Tier 1a chandra retired per B-50a.2 (see Asgard ADR-006 revision 2026-05-08).
 
 name: Build
 
@@ -22,7 +23,6 @@ jobs:
       matrix:
         include:
           - { name: syn-paddleocr-sidecar, context: ./services/paddleocr-sidecar }
-          - { name: syn-chandra-sidecar, context: ./services/chandra-sidecar }
     permissions:
       contents: read
       packages: write

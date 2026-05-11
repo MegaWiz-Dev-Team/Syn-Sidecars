@@ -1,6 +1,6 @@
 # Syn-Sidecars
 
-Thin FastAPI wrappers around upstream open-source OCR libraries — used by Asgard's **Syn** OCR pipeline (Tier 1a/1b classifiers).
+Thin FastAPI wrappers around upstream open-source OCR libraries — used by Asgard's **Syn** OCR pipeline (Tier 1b classifier).
 
 License: Apache 2.0 (matches upstream library licenses).
 
@@ -9,12 +9,9 @@ License: Apache 2.0 (matches upstream library licenses).
 ### `services/paddleocr-sidecar/` — Tier 1b
 FastAPI wrapper around [PaddleOCR](https://github.com/PaddlePaddle/PaddleOCR) (Apache 2.0).
 
-**Used for:** printed Thai / English / mixed Thai+English on standard medical forms. Default fast path in Syn's 4-tier hybrid OCR strategy.
+**Used for:** printed Thai / English / mixed Thai+English on standard medical forms. Default fast path in Syn's 3-tier hybrid OCR strategy.
 
-### `services/chandra-sidecar/` — Tier 1a
-FastAPI wrapper around [datalab-to/chandra](https://github.com/datalab-to/chandra) (Apache 2.0).
-
-**Used for:** handwriting, complex tables, mixed scripts where PaddleOCR's box detection breaks. Chandra is the only license-clean tool from the datalab-to family.
+> **Retired:** `services/chandra-sidecar/` (Tier 1a) was removed per [B-50a.2 assessment](https://github.com/MegaWiz-Dev-Team/Syn/blob/main/docs/B-50a.2_chandra_assessment_2026-05-08.md) — Typhoon-OCR Tier 1c outperformed chandra on Thai handwriting (CER 0.000 vs 0.193). See [Asgard ADR-006 revision](https://github.com/MegaWiz-Dev-Team/Asgard/blob/main/docs/architecture/ADR-006-Syn-OCR-Stack.md).
 
 ## Why a separate public repo?
 
@@ -31,7 +28,6 @@ Each sidecar is a self-contained Docker build:
 
 ```bash
 docker build -t syn-paddleocr-sidecar services/paddleocr-sidecar/
-docker build -t syn-chandra-sidecar services/chandra-sidecar/
 ```
 
 ## Asgard integration
