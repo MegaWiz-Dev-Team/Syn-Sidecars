@@ -2,8 +2,8 @@
 
 Registered as engine="paddleocr-local" in the smart router for audit-row
 stability, but the implementation uses EasyOCR (see requirements.txt for
-the rationale). The HTTP contract matches the chandra-sidecar so the
-smart router can swap freely.
+the rationale). The HTTP contract is the canonical Syn sidecar shape so
+the smart router can swap engines freely.
 """
 
 from __future__ import annotations
